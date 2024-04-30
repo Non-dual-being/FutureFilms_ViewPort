@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="DU">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Jukebox Future Films</title>
+</head>
+<body class="futurefilms">
+    <header>
+        <h1>FutureFilms VideoQuiz</h1>
+    </header>
+    <footer>
+    </footer>
+
+    <main>
+        <h2>Selection Box Future films</h2>
+        <div id="theme-selection">
+            <h3>Selecteer en start de Quiz <span class="subtitle">kies uit 8 verschillende themas en 3 verschillende niveaus.</span></h3>
+            <form id="themesForm">
+            </form>
+            <button onclick="submitSelection(event)">Start Quiz</button>
+        </div>
+    </main>
+
+    <script>
+        const THEMES = [
+            'Mobiliteit', 
+            'Energietransitie', 
+            'Klimaatverandering',
+            'Watermanagement',
+            'Grondstoffen', 
+            'Voedselinnovatie', 
+            'Biodiversiteit',
+            'InternetofThings'
+        ];
+        
+        const LEVELS = ['1', '2', '3'];
+        const MAX_SELECTION = 8;
+        let selectedCheckboxes = [];
+        
+        window.onload = function() {
+            const form = document.getElementById('themesForm');
+            const checkboxesContainer = document.createElement('div'); // Decoratieve container voor achtergrondkleur
+    
+            THEMES.forEach((theme) => {
+                const themeDiv = document.createElement('div');
+                themeDiv.className = 'theme-row';
+                
+                const label = document.createElement('label');
+                label.textContent = theme;
+                themeDiv.appendChild(label);
+    
+            LEVELS.forEach((level) => {
+                const input = document.createElement('input');
+                input.type = 'checkbox';
+                input.id = theme + level;
+                input.name = theme;
+                input.value = level;
+
+                // Check if there are videos available for this theme and level
+                if (!beschikbareVideos[theme] || !beschikbareVideos[theme][level] || beschikbareVideos[theme][level].length === 0) {
+                    input.disabled = true;  // Disable the checkbox if no videos are available
+                    input.classList.add('disabled-checkbox');  // Add class for styling disabled checkboxes
+                } else {
+                    input.addEventListener('change', handleCheckboxChange);
+                }
+        
+                const levelLabel = document.createElement('label');
+                levelLabel.htmlFor = input.id;
+                levelLabel.textContent = level;
+                
+                themeDiv.appendChild(input);  // Adds the checkbox to the theme div
+                themeDiv.appendChild(levelLabel);  // Adds the label to the theme div
+    });
+
+    form.appendChild(themeDiv);  // Adds the theme div to the form
+});
+
+
+}
+        
+        
+        function handleCheckboxChange(event) {
+            const { id, checked } = event.target;
+            if (checked) {
+                selectedCheckboxes.push(id);
+                if (selectedCheckboxes.length > MAX_SELECTION) {
+                    const toUncheck = selectedCheckboxes.shift();
+                    document.getElementById(toUncheck).checked = false;
+                }
+            } else {
+                selectedCheckboxes = selectedCheckboxes.filter(selectedId => selectedId !== id);
+            }
+        };
+
+        const beschikbareVideos = {
+            "Mobiliteit": {
+                "1": [
+                    "Mobiliteit_1_1.mp4",
+                    "Mobiliteit_1_2.mp4",
+                    "Mobiliteit_1_3.mp4",
+                    "Mobiliteit_1_4.mp4",
+                    "Mobiliteit_1_5.mp4",
+                ]
+            },
+            "Energietransitie": {
+                "1": [
+                    "Energietransitie_1_1.mp4",
+                    "Energietransitie_1_2.mp4",
+                    "Energietransitie_1_3.mp4",
+                    "Energietransitie_1_4.mp4",
+                    "Energietransitie_1_5.mp4",
+                ]
+            },
+            "Klimaatverandering": {
+                "1": [
+                    "Klimaatverandering_1_1.mp4",
+                    "Klimaatverandering_1_2.mp4",
+                    "Klimaatverandering_1_3.mp4",
+                    "Klimaatverandering_1_4.mp4",
+                    "Klimaatverandering_1_5.mp4",
+                ],
+                // Herhaal voor niveau 2 en 3
+            },
+            "Watermanagement": {
+                "1": [
+                    "Watermanagement_1_1.mp4",
+                    "Watermanagement_1_2.mp4",
+                    "Watermanagement_1_3.mp4",
+                    "Watermanagement_1_4.mp4",
+                    "Watermanagement_1_5.mp4",
+                ],
+                // Herhaal voor niveau 2 en 3
+            },
+            "Grondstoffen": {
+                "1": [
+                    "Grondstoffen_1_1.mp4",
+                    "Grondstoffen_1_2.mp4",
+                    "Grondstoffen_1_3.mp4",
+                    "Grondstoffen_1_4.mp4",
+                    "Grondstoffen_1_5.mp4",
+                ],
+                // Herhaal voor niveau 2 en 3
+            },
+            "Voedselinnovatie": {
+                "1": [
+                    "Voedselinnovatie_1_1.mp4",
+                    "Voedselinnovatie_1_2.mp4",
+                    "Voedselinnovatie_1_3.mp4",
+                    "Voedselinnovatie_1_4.mp4",
+                    "Voedselinnovatie_1_5.mp4",
+                ],
+                // Herhaal voor niveau 2 en 3
+            },
+            "Biodiversiteit": {
+                "1": [
+                    "Biodiversiteit_1_1.mp4",
+                    "Biodiversiteit_1_2.mp4",
+                    "Biodiversiteit_1_3.mp4",
+                    "Biodiversiteit_1_4.mp4",
+                    "Biodiversiteit_1_5.mp4",
+                ],
+                // Herhaal voor niveau 2 en 3
+            },
+            "InternetofThings": {
+                "1": [
+                    "InternetofThings_1_1.mp4",
+                    "InternetofThings_1_2.mp4",
+                    "InternetofThings_1_3.mp4",
+                    "InternetofThings_1_4.mp4",
+                    "InternetofThings_1_5.mp4",
+                ]
+        // Herhaal voor niveau 2 en 3
+            },
+        };
+        
+        function submitSelection(event) {
+            if (selectedCheckboxes.length === 0) {
+                showWarningMessage('Selecteer ten minste één thema van niveua 1, 2 of 3 om de quiz te starten.');
+                return; // Stop de functie als er geen selecties zijn gemaakt
+        }
+
+        function showWarningMessage(message) {
+            const messageElement = document.createElement('div');
+            messageElement.className = 'warning-message';
+            messageElement.textContent = message;
+            document.body.appendChild(messageElement);
+
+            setTimeout(() => {
+                messageElement.remove();
+            }, 5000); // Verwijder de melding na 5000 milliseconden (5 seconden)
+}
+            event.preventDefault();
+            const selectedThemes = {};
+            THEMES.forEach((theme) => {
+                selectedThemes[theme] = [];
+                LEVELS.forEach((level) => {
+                    const checkboxId = theme + level;
+                    if (selectedCheckboxes.includes(checkboxId)) {
+                        selectedThemes[theme].push(level);
+                    }
+                    // selectedThemes structuur = {'Mobiliteit':['1','2']}
+                });
+            });
+            
+
+
+             // Filter out themes that do not have any levels selected
+            Object.keys(selectedThemes).forEach(theme => {
+             if (selectedThemes[theme].length === 0) {
+                    delete selectedThemes[theme];
+                }
+            });
+
+            
+
+            if (Object.keys(selectedThemes).length === 1) {
+                // Vind een willekeurig thema om toe te voegen dat niet het al geselecteerde thema is
+                const beschikbareThemas = THEMES.filter(t => !selectedThemes.hasOwnProperty(t));
+                const randomThema = beschikbareThemas[Math.floor(Math.random() * beschikbareThemas.length)];
+                // Voeg dit thema toe met alleen niveau '1'
+                selectedThemes[randomThema] = ['1'];
+            }
+
+            opslaanGeselecteerdeVideos(selectedThemes); // Aanroepen van de nieuwe functie.
+            window.location.href = './videoplayer.html';
+        }
+        
+
+        function opslaanGeselecteerdeVideos(selectedThemes) {
+            const eindLijst = [];
+            const themaLijsten = {}; // Tijdelijke opslag voor video's per thema en niveau
+            let niveauIndexen = {};
+
+                // Initialiseer niveauIndexen voor elk thema op 0
+            Object.keys(selectedThemes).forEach(theme => {
+                niveauIndexen[theme] = 0;
+             });
+
+            // Stap 1: Verzamel alle beschikbare video's per thema en niveau
+            Object.keys(selectedThemes).forEach(theme => {
+                themaLijsten[theme] = {};
+                selectedThemes[theme].forEach(level => {
+                    if (beschikbareVideos[theme] && beschikbareVideos[theme][level]) {
+                        if (!themaLijsten[theme][level]) {
+                            themaLijsten[theme][level] = [];
+                        }
+                        themaLijsten[theme][level] = themaLijsten[theme][level].concat(beschikbareVideos[theme][level]);
+                    }
+                });
+            });
+
+            // Stap 2: Selecteer 8 willekeurige video's afwisselend per thema en niveau
+            const themaKeys = Object.keys(themaLijsten).filter(theme => Object.keys(themaLijsten[theme]).some(level => themaLijsten[theme][level].length > 0));
+            let themaIndex = 0; // Startpunt voor thema-selectie
+          
+            while (eindLijst.length < 8 && themaKeys.length > 0) {
+                const thema = themaKeys[themaIndex % themaKeys.length];
+                const niveauKeys = Object.keys(themaLijsten[thema]);
+                let niveauIndex = niveauKeys.length > 1 ? (niveauIndexen[thema] || 0) : 0; // Gebruik de opgeslagen index voor dit thema
+                const niveau = niveauKeys[niveauIndex];
+                const videos = themaLijsten[thema][niveau];
+           
+                
+                if (videos.length > 0) {
+                    const videoIndex = Math.floor(Math.random() * videos.length);
+                    eindLijst.push(videos.splice(videoIndex, 1)[0]);
+                }
+
+                // Update de niveauIndex voor het huidige thema
+                if (niveauKeys.length > 1) {
+                    niveauIndexen[thema] = (niveauIndex + 1) % niveauKeys.length;
+                }
+
+                // Verwijder thema als er geen video's meer zijn
+                if (videos.length === 0) {
+                    themaKeys.splice(themaIndex % themaKeys.length, 1);
+                } else {
+                    themaIndex++;
+                }
+            }
+            console.log(eindLijst);
+            localStorage.setItem('videoLijst', JSON.stringify(eindLijst)); // Opslaan in localStorage
+
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,362 @@
+@font-face {
+    font-family: 'DarkForest';
+    src: url('./dark_forest/darkforest.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+body.futurefilms {
+    font-family: 'DarkForest', sans-serif;
+    display: flex;
+    justify-content: center; /* Centreert de hoofdinhoud horizontaal */
+    align-items: center; /* Centreert de hoofdinhoud verticaal */
+    min-height: 100vh; /* Zorgt dat de body ten minste de hele viewport hoogte inneemt */
+    margin: 0; /* Verwijdert standaard marge */
+    padding: 0; /* Verwijdert standaard padding */
+    background-image: url('./achtergrond_futurefilms_4.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative
+}
+
+
+footer {
+    display: block; /* Zorgt dat de footer zichtbaar wordt */
+    background-color: #152036; /* Donkerblauwe achtergrondkleur */
+    color: white; /* Witte tekstkleur */
+    text-align: center; /* Centreert de tekst in de footer */
+    padding: 20px; /* Voegt ruimte toe binnen de footer */
+    width: 100%; /* Zorgt dat de footer de volledige breedte inneemt */
+    box-sizing: border-box; /* Zorgt ervoor dat padding en border in de breedte inbegrepen zijn */
+    position: fixed; /* De footer blijft onderaan de pagina */
+    bottom: 0; /* Plaatst de footer onderaan */
+    left: 0; /* Plaatst de footer links */
+    z-index: 1000; /* Zorgt dat de footer boven andere elementen zweeft */
+}
+
+header {
+    display: block; /* Zorgt dat de header zichtbaar wordt */
+    background-color: #152036; /* Donkerblauwe achtergrondkleur */
+    color: white; /* Witte tekstkleur */
+    text-align: center; /* Centreert de tekst in de header */
+    padding: 20px; /* Voegt ruimte toe binnen de header */
+    width: 100%; /* Zorgt dat de header de volledige breedte inneemt */
+    box-sizing: border-box; /* Zorgt ervoor dat padding en border in de breedte inbegrepen zijn */
+    position: fixed; /* De header blijft bovenaan de pagina */
+    top: 0; /* Plaatst de header bovenaan */
+    left: 0; /* Plaatst de header links */
+    z-index: 1000; /* Zorgt dat de header boven andere elementen zweeft */
+}
+
+
+
+
+h1 {
+    font-family: 'DarkForest', sans-serif;
+    margin: 0;
+}
+
+h2 {
+    position: relative;  /* Maakt relatieve positionering mogelijk */
+    top: -30px;           
+    margin-top: 0;       /* Verwijdert de originele bovenmarge indien nodig */
+    color : black
+   
+}
+
+h3 {
+    font-family: 'DarkForest', sans-serif;
+    font-weight: bold;
+    color : #152036; 
+    text-align: center; /* Centreert de tekst in de header */
+    margin-top: -35px; /* Pas de waarde aan naar behoefte */
+}
+
+h3 .subtitle {
+    display: block; /* Maakt de span zich gedragen als een blokelement */
+    font-size: smaller; /* Maakt de tekst kleiner dan de hoofdtekst van h3 */
+    color: #465267; /* Lichtere tint van de basiskleur */
+}
+
+
+main {
+    font-family: 'DarkForest', sans-serif;
+    width: 33.333%; /* Neemt 1/3 van de breedte van de body in */
+    text-align: center; /* Centreert de inhoud van main */
+}
+
+#theme-selection {
+    font-family: 'DarkForest', sans-serif;
+    padding: 10px;
+    text-align: left;
+    
+}
+
+#themesForm {
+    position: relative;
+    width: 80%; /* Zorg ervoor dat dit breed genoeg is om de ruimte te bieden voor de split */
+    padding: 10px;
+    margin: auto; /* Centreert de form binnen zijn parent element */
+    border: 2px solid #152036; /* 2px dikke, solide rand met de kleur #152036 */
+}
+
+#themesForm::before, #themesForm::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    z-index: -1;
+}
+
+#themesForm::before {
+    left: 0;
+    width: 50%;
+    background-color: #1520362e; /* Licht doorschijnend donkerblauw */
+}
+
+#themesForm::after {
+    left: 50%; /* Begin precies in het midden */
+    width: 50%;
+    color:#1520363f
+}
+
+
+.theme-row {
+    font-family: 'DarkForest', sans-serif;
+    color: #152036;
+    display: flex;
+    align-items: center;
+    position: relative; /* Nodig voor positionering van het pseudo-element */
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    background: linear-gradient(to right, rgba(21, 32, 54, 0.4) 50%, rgba(240, 240, 240, 0.4) 50%);
+}
+
+
+
+
+.theme-row label {
+    font-family: 'DarkForest', sans-serif;
+    margin-right: 10px;
+}
+
+
+
+.theme-row label:first-of-type {
+    font-family: 'DarkForest', sans-serif;
+    flex-grow: 1; /* Laat het label de beschikbare ruimte opvullen */
+    padding-right: 10px; /* Ruimte tussen label en checkboxes */
+}
+
+.theme-row label {
+    font-family: 'DarkForest', sans-serif;
+    margin-right: 10px; /* Ruimte tussen checkboxes */
+    white-space: nowrap; /* Voorkomt afbreken van tekst */
+}
+
+.disabled-checkbox + label:after {
+    content: " \2716"; /* Kruis of ander symbool */
+    color: #152036;; /* Maak het symbool rood of een andere opvallende kleur */
+    margin-left: 5px;
+    font-size: smaller;
+}
+
+.disabled-checkbox:hover + label:after {
+    content: " Geen video's beschikbaar"; /* Volledige bericht bij hover */
+    background-color: #304878;
+    color: white;
+    border: 1px solid #152036;
+}
+
+.button-container {
+    position: relative;
+    height: 100vh; /* Zorgt dat de container de volledige viewport hoogte heeft */
+}
+
+button {
+    font-family: 'DarkForest', sans-serif;
+    font-size: 16px;
+    padding: 10px 20px; /* Normale padding */
+    background-color: transparent; /* Geen achtergrondkleur bij standaard */
+    color: #152036c0; /* Lichtere tekstkleur, die bij hover wit wordt */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    position: absolute;
+    top: 85%; /* Verticale centrering */
+    left: 50.5%; /* Horizontale centrering */
+    transform: translate(-50%, -50%); /* Zorgt voor nauwkeurige centrering */
+    transition: background-size 0.5s ease-out, padding 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    background-size: 0% 100%; /* Begint zonder zichtbare achtergrond */
+}
+
+button:hover {
+    color: white;
+    background-image: linear-gradient(to right, #152036c0 0%, #304878 100%);
+    background-size: 100% 100%; /* Volledige breedte gradient bij hover */
+    padding: 17px 27px; /* Vergroot de padding bij hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6); /* Voeg schaduw toe bij hover */
+
+}
+
+button:not(.customButton):hover {
+    color: white;
+    background-image: linear-gradient(to right, #152036c0 0%, #304878 100%);
+    background-size: 100% 100%;
+    padding: 17px 27px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+}
+
+.warning-message {
+    position: absolute;
+    bottom: 130px; /* Plaats de melding 20px boven de onderkant van de viewport */
+    left: 50%; /* Centreert horizontaal */
+    transform: translateX(-50%); /* Nauwkeurige horizontale centrering */
+    width: 80%; /* Aanpasbaar op basis van designvereisten */
+    max-width: 600px; /* Maximale breedte om leesbaarheid te garanderen */
+    padding: 10px;
+    background-color: #304878;
+    color: white;
+    text-align: center;
+    border: 1px solid #152036;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    z-index: 1001; /* Zorg ervoor dat de melding boven andere elementen wordt weergegeven */
+}
+
+
+body.videoPlayer {
+    font-family: 'DarkForest', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    background-image: url('./achtergrond_videoplayer.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+#videoPlayerContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+}
+
+video {
+    width: 80%;
+    max-width: 1080px;
+    position: absolute; /* Hiermee kun je de exacte positie van de video bepalen */
+    top: 3%; /* Verplaatst de video 10% van de bovenkant van de container */
+    left: 20%; /* Verplaatst de video 5% van de rechterkant van de container */
+  
+}
+
+.buttonContainer {
+    position: fixed;
+    bottom: 6px;
+    left: 140px; /* Voorkomt dat de knoppen te dicht bij de rand staan */
+    display: flex;
+    flex-direction: row; /* Zorgt ervoor dat de knoppen horizontaal worden uitgelijnd */
+    gap: 60px; /* Ruimte tussen de knoppen */
+    box-sizing: border-box;
+    margin: auto;
+}
+
+#Terugknop, #shuffleknop {
+    padding: 10px 20px;
+    background-color: #15203661; /* Huidige achtergrondkleur met transparantie */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    position: static;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, background-position 0.3s ease; /* Voeg background-position toe aan de transition */
+    background-size: 200% 100%; /* Verdubbel de achtergrond breedte */
+    background-position: right bottom; /* Begin met de achtergrond gecentreerd naar rechts */
+}
+
+#Terugknop:hover, #shuffleknop:hover {
+    background-color: #152036c0; /* Doelkleur bij hover */
+    color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+    background-position: left bottom; /* Verschuif de achtergrond naar links om de "uitvouw" illusie te creëren */
+}
+
+
+.customContainer {
+    position: fixed;
+    top: 50%;
+    left: 3%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Horizontaal centreren */
+    justify-content: center; /* Verticaal centreren */
+    background-color: rgba(24, 36, 60, 0.9); /* Semi-transparante achtergrond */
+    padding: 10px 30px 10px 30px; /* Boven, rechts, onder, links padding */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 220px; /* Breedte van de container */
+    box-sizing: border-box;
+    border: 2px solid #fff; /* Maakt de rand dikker en wit */
+}
+
+.customContainer::before {
+    content: "Future Controls";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%; /* Zorgt dat de titel de volledige breedte van de container gebruikt */
+    background-color: #2b3a52; /* Een donkergrijze/zwarte kleur voor de titelachtergrond */
+    color: #fff;
+    padding: 10px 0; /* Padding voor de titel */
+    border-top-left-radius: 8px; /* Afgeronde hoeken voor de titel, moet net iets minder zijn dan de container */
+    border-top-right-radius: 8px;
+    font-size: 1.2em;
+    box-sizing: border-box; /* Inclusief de padding en border in de breedte */
+    margin-bottom: 30px; /* Ruimte tussen titel en knoppen */
+   
+}
+
+.customButton:first-child {
+    margin-top: 0;
+}
+
+.customButton:last-child {
+    margin-bottom: 0;
+}
+
+.customButton {
+    padding: 10px 10px;
+    background-color: #fff;
+    color: #333;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+    transition: background-color 0.3s, box-shadow 0.3s, background-size 0.3s ease-in-out, background-position 0s;
+    background-image: linear-gradient(to right, #ffffff 0%, #f0f0f0 100%);
+    background-size: 0% 100%; /* Begint zonder zichtbare achtergrond */
+    margin-top: 20px;
+    margin-bottom: 20px;
+    position: relative;
+    background-position: center; /* Zorgt ervoor dat de gradiënt vanuit het midden start */
+}
+
+.customButton:hover {
+    background-image: linear-gradient(to right, #152036c0 0%, #304878 100%);
+    color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+    padding: 10px 10px;
+    background-size: 100% 100%; /* Volledige breedte gradient bij hover */
+}
+
+
