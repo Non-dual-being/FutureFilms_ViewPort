@@ -10,18 +10,27 @@
     <header>
         <h1>FutureFilms VideoQuiz</h1>
     </header>
+    <div class = "center-container">
+        <h2>
+            <span class="main-text">Selecteer en start de Quiz</span>
+            <span class="subtitle">kies uit 8 verschillende themas en 3 verschillende niveaus.</span>
+        </h2>
+        <form id="themesForm">
+            <!-- Hier komen je checkboxes en labels -->
+        </form>
+    </div>
+    <button onclick="submitSelection(event)">Start Quiz</button>
     <footer>
+        <div class="icon"><img src="./icons/biodiversiteit.png" alt="Icon 1"></div>
+        <div class="icon"><img src="./icons/energietransititie.png" alt="Icon 2"></div>
+        <div class="icon"><img src="./icons/grondstoffen.png" alt="Icon 3"></div>
+        <div class="icon"><img src="./icons/iot.png" alt="Icon 4"></div>
+        <div class="icon"><img src="./icons/klimaatverandering.png" alt="Icon 5"></div>
+        <div class="icon"><img src="./icons/mobiliteit.png" alt="Icon 6"></div>
+        <div class="icon"><img src="./icons/voedselinnovatie.png" alt="Icon 7"></div>
+        <div class="icon"><img src="./icons/watermanagement.png" alt="Icon 8"></div>
     </footer>
-
-    <main>
-        <h2>Selection Box Future films</h2>
-        <div id="theme-selection">
-            <h3>Selecteer en start de Quiz <span class="subtitle">kies uit 8 verschillende themas en 3 verschillende niveaus.</span></h3>
-            <form id="themesForm">
-            </form>
-            <button onclick="submitSelection(event)">Start Quiz</button>
-        </div>
-    </main>
+    
 
     <script>
         const THEMES = [
@@ -72,14 +81,12 @@
                 
                 themeDiv.appendChild(input);  // Adds the checkbox to the theme div
                 themeDiv.appendChild(levelLabel);  // Adds the label to the theme div
-    });
-
+        });
     form.appendChild(themeDiv);  // Adds the theme div to the form
 });
 
-
 }
-        
+                
         
         function handleCheckboxChange(event) {
             const { id, checked } = event.target;
