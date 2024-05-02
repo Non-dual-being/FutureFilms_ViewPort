@@ -7,6 +7,10 @@
     <title>Jukebox Future Films</title>
 </head>
 <body class="futurefilms">
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loader"></div>
+    </div>
+    
     <header>
         <h1>FutureFilms VideoQuiz</h1>
     </header>
@@ -48,10 +52,10 @@
         const MAX_SELECTION = 8;
         let selectedCheckboxes = [];
         
-        window.onload = function() {
+        document.addEventListener('DOMContentLoaded', function() {
             const form = document.getElementById('themesForm');
             const checkboxesContainer = document.createElement('div'); // Decoratieve container voor achtergrondkleur
-    
+            const fragment = document.createDocumentFragment(); //om rendering te verbeteren
             THEMES.forEach((theme) => {
                 const themeDiv = document.createElement('div');
                 themeDiv.className = 'theme-row';
@@ -81,11 +85,50 @@
                 
                 themeDiv.appendChild(input);  // Adds the checkbox to the theme div
                 themeDiv.appendChild(levelLabel);  // Adds the label to the theme div
-        });
+    });
+
     form.appendChild(themeDiv);  // Adds the theme div to the form
 });
+addHoverListeners();
+form.appendChild(fragement);
 
-}
+})
+        
+   
+        function addHoverListeners() {
+            const disabledCheckboxes = document.querySelectorAll('.disabled-checkbox');
+            disabledCheckboxes.forEach(checkbox => {
+                const label = checkbox.nextElementSibling; 
+
+                checkbox.addEventListener('mouseenter', () => showHoverMessage('Nog geen FutureFilm beschikbaar', checkbox));
+                label.addEventListener('mouseenter', () => showHoverMessage('Nog geen FutureFilmbeschikbaar', label));
+
+                checkbox.addEventListener('mouseleave', hideHoverMessage);
+                label.addEventListener('mouseleave', hideHoverMessage);
+            });
+        }
+
+        function showHoverMessage(message, element) {
+            let hoverMessageElement = document.querySelector('.hover-message');
+            if (!hoverMessageElement) {
+                hoverMessageElement = document.createElement('div');
+                hoverMessageElement.className = 'hover-message';
+                document.body.appendChild(hoverMessageElement);
+            }
+            hoverMessageElement.textContent = message;
+            hoverMessageElement.style.display = 'block';
+
+            const rect = element.getBoundingClientRect();
+            hoverMessageElement.style.left = `${rect.left + window.scrollX}px`;
+            hoverMessageElement.style.top = `${rect.top + window.scrollY - 30}px`; // 30 pixels boven het element
+        }
+
+        function hideHoverMessage() {
+            const hoverMessageElement = document.querySelector('.hover-message');
+            if (hoverMessageElement) {
+                hoverMessageElement.style.display = 'none';
+            }
+        }
                 
         
         function handleCheckboxChange(event) {
@@ -234,7 +277,8 @@
             window.location.href = './videoplayer.html';
         }
         
-
+        
+    
         function opslaanGeselecteerdeVideos(selectedThemes) {
             const eindLijst = [];
             const themaLijsten = {}; // Tijdelijke opslag voor video's per thema en niveau
@@ -290,7 +334,13 @@
             console.log(eindLijst);
             localStorage.setItem('videoLijst', JSON.stringify(eindLijst)); // Opslaan in localStorage
 
-        }
+}
+            window.addEventListener('load', function() {
+                            const loadingScreen = document.getElementById('loadingScreen');
+                            if (loadingScreen) {
+                                loadingScreen.style.display = 'none';
+                            }
+            });
     </script>
 </body>
 </html>

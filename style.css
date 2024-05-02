@@ -26,6 +26,33 @@ body.futurefilms {
 
 }
 
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Houdt het laadscherm boven alle andere inhoud */
+}
+
+.loader {
+    border: 8px solid #f3f3f3; /* Light grey */
+    border-top: 8px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
 header, footer {
     width: 100vw; /* Volledige breedte van de viewport */
     color: white; /* Witte tekst */
@@ -49,18 +76,22 @@ footer {
     justify-content: center; /* Centreert de inhoud horizontaal */
     align-items: center; /* Centreert de inhoud verticaal */
     width: 100vw;
-    height: 3vw;
+    height: 4vw;
     text-align: center;
     background-color: #152036;
-    padding: 1vh 0;
+    padding: 3vh 0;
 }
     
-.icon {
-    width: clamp(20px, 2vw, 40px); /* past de breedte aan binnen een bereik */
-    height: clamp(20px, 2vw, 40px); /* past de hoogte aan binnen een bereik */
-    margin: 0 0.5vw;
-    position:relative;
+
+
+.icon img {
+    width: 100%; /* Zorgt ervoor dat de afbeelding zich aanpast aan de container */
+    height: auto; /* Behoudt de aspect ratio van de afbeelding */
+    max-width: 40px; /* Maximale breedte */
+    min-width: 20px; /* Minimale breedte */
+    margin: 0 20px; /* Horizontale marge tussen iconen */
 }
+
 
 
 
@@ -193,14 +224,15 @@ button {
     background-size: 0% 100%; /* Begint zonder zichtbare achtergrond */
 }
 
-button:hover {
+
+button:not(.customButton):hover {
     color: white;
     background-image: linear-gradient(to right, #152036c0 0%, #304878 100%);
-    background-size: 100% 100%; /* Volledige breedte gradient bij hover */
-    padding: 17px 27px; /* Vergroot de padding bij hover */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6); /* Voeg schaduw toe bij hover */
-
+    background-size: 100% 100%;
+    padding: 17px 27px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
 }
+
 
 .warning-message {
     position: absolute;
@@ -218,6 +250,18 @@ button:hover {
     z-index: 1001; /* Zorg ervoor dat de melding boven andere elementen wordt weergegeven */
 }
 
+.hover-message {
+    position: fixed;
+    background-color: #304878;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid #152036;
+    display: none;
+    z-index: 2000; 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
 
 body.videoPlayer {
     font-family: 'DarkForest', sans-serif; /* Zet het standaard lettertype */
@@ -233,4 +277,132 @@ body.videoPlayer {
     background-repeat: no-repeat;
 }
 
+#videoPlayerContainer {
+    position: fixed; /* Zorgt dat de positie altijd vast is in de viewport */
+    top: 45%; /* Start aan de helft van de viewport hoogte */
+    left: 60%; /* Start aan de helft van de viewport breedte */
+    transform: translate(-50%, -50%); /* Schuift de container terug met de helft van zijn eigen grootte */
+    width: 80vw; /* Neemt 80% van de viewport breedte in */
+    min-height: 100vh; /* Minimale hoogte is 100% van de viewport hoogte */
+    text-align: center; /* Centreert tekst binnen de container */
+    display: flex;
+    flex-direction: column; /* Items worden verticaal gestapeld */
+    align-items: center; /* Centreert items horizontaal binnen de container */
+    overflow: hidden; /* Voorkomt scrollbars als de inhoud groter is dan de container */
+}
+
+video {
+    width: 100%; /* Neemt de volledige breedte van de container in */
+    max-width: 1080px; /* Maximale breedte is 1080px */
+    position: absolute; /* Absoluut gepositioneerd binnen de container */
+    top: 50%; /* Start op 50% van de top van de container */
+    left: 50%; /* Start op 50% van de linkerzijde van de container */
+    transform: translate(-50%, -50%); /* Centreert de video exact in het midden van de container */
+    height: auto; /* Behoudt de aspect ratio van de video */
+}
+
+.buttonContainer {
+    position: absolute;
+    bottom: 0.5vh;
+    left: 8.5vw; /* Voorkomt dat de knoppen te dicht bij de rand staan */
+    display: flex;
+    flex-direction: row; /* Zorgt ervoor dat de knoppen horizontaal worden uitgelijnd */
+    gap: 60px; /* Ruimte tussen de knoppen */
+    box-sizing: border-box;
+    margin: auto;
+}
+
+
+#Terugknop, #shuffleknop {
+    padding: 8px 15px;
+    background-color: #15203661; /* Huidige achtergrondkleur met transparantie */
+    color: white;
+    border: white;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    position: static;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, background-position 0.3s ease; /* Voeg background-position toe aan de transition */
+    background-size: 200% 100%; /* Verdubbel de achtergrond breedte */
+    background-position: right bottom; /* Begin met de achtergrond gecentreerd naar rechts */
+    font-size: 1.3vw;
+}
+
+#Terugknop:hover, #shuffleknop:hover {
+    background-color: #152036c0; /* Doelkleur bij hover */
+    color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+    background-position: left bottom; /* Verschuif de achtergrond naar links om de "uitvouw" illusie te creëren */
+}
+
+.customContainer {
+    position: absolute;
+    top: 45vh;
+    left: 10vh;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Horizontaal centreren */
+    justify-content: center; /* Verticaal centreren */
+    background-color: rgba(24, 36, 60, 0.911); /* Semi-transparante achtergrond met 50% transparantie */
+    padding: 10px 30px 10px 30px; /* Boven, rechts, onder, links padding */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 15vw; /* Breedte van de container */
+    box-sizing: border-box;
+    border: 2px solid #fff; /* Maakt de rand dikker en wit */
+}
+
+.customContainer::before {
+    content: "Future Controls";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%; /* Zorgt dat de titel de volledige breedte van de container gebruikt */
+    background-color: #8f9cb132; /* Een donkergrijze/zwarte kleur voor de titelachtergrond */
+    color: white;
+    padding: 10px 0; /* Padding voor de titel */
+    border-top-left-radius: 8px; /* Afgeronde hoeken voor de titel, moet net iets minder zijn dan de container */
+    border-top-right-radius: 8px;
+    font-size: 1.2vw;
+    box-sizing: border-box; /* Inclusief de padding en border in de breedte */
+    margin-bottom: 40px; /* Ruimte tussen titel en knoppen */
+   
+}
+
+.customButton:first-child {
+    margin-top: 0;
+}
+
+.customButton:last-child {
+    margin-bottom: 0;
+}
+
+.customButton {
+    padding: 10px 10px;
+    background-color: #fff;
+    color: #333;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+    transition: background-color 0.3s, box-shadow 0.3s, background-size 0.3s ease-in-out, background-position 0s;
+    background-image: linear-gradient(to right, #ffffff 0%, #f0f0f0 100%);
+    background-size: 0% 100%; /* Begint zonder zichtbare achtergrond */
+    margin-top: 20px;
+    margin-bottom: 20px;
+    position: relative;
+    background-position: center; /* Zorgt ervoor dat de gradiënt vanuit het midden start */
+    font-size: 1.2vw;
+}
+
+.customButton:hover {
+    background-image: linear-gradient(to right, #152036c0 0%, #304878 100%);
+    color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+    padding: 10px 10px;
+    background-size: 100% 100%; /* Volledige breedte gradient bij hover */
+}
 
