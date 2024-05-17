@@ -23,7 +23,8 @@
             <!-- Hier komen je checkboxes en labels -->
         </form>
     </div>
-    <button onclick="submitSelection(event)">Start Quiz</button>
+    <button onclick="submitSelection(event)" id="StartQuizknop">Start Quiz</button>
+    <button onclick="downloadPDF()" id="Downloadknop">Download spelbord</button>
     <footer>
         <div class="icon"><img src="./icons/biodiversiteit.png" alt="Icon 1"></div>
         <div class="icon"><img src="./icons/energietransititie.png" alt="Icon 2"></div>
@@ -275,6 +276,11 @@ form.appendChild(fragement);
 
             opslaanGeselecteerdeVideos(selectedThemes); // Aanroepen van de nieuwe functie.
             window.location.href = './videoplayer.html';
+
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+                checkboxes.forEach(checkbox => {
+                    checkbox.checked = false;
+                });
         }
         
         
@@ -341,6 +347,14 @@ form.appendChild(fragement);
                                 loadingScreen.style.display = 'none';
                             }
             });
+        function downloadPDF() {
+        var pdfLink = document.createElement('a');
+        pdfLink.href = 'spelbord_future_films.pdf';
+        pdfLink.download = 'spelbord_future_films.pdf';
+        document.body.appendChild(pdfLink);
+        pdfLink.click();
+        document.body.removeChild(pdfLink);
+        };
     </script>
 </body>
 </html>
