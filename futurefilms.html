@@ -78,6 +78,7 @@
                     input.classList.add('disabled-checkbox');  // Add class for styling disabled checkboxes
                 } else {
                     input.addEventListener('change', handleCheckboxChange);
+                    input.classList.add('enabled-checkbox');
                 }
         
                 const levelLabel = document.createElement('label');
@@ -228,7 +229,7 @@ form.appendChild(fragement);
         
         function submitSelection(event) {
             if (selectedCheckboxes.length === 0) {
-                showWarningMessage('Selecteer ten minste één thema van niveua 1, 2 of 3 om de quiz te starten.');
+                showWarningMessage('Selecteer ten minste checkbox om de quiz te starten.');
                 return; // Stop de functie als er geen selecties zijn gemaakt
         }
 
@@ -240,7 +241,7 @@ form.appendChild(fragement);
 
             setTimeout(() => {
                 messageElement.remove();
-            }, 5000); // Verwijder de melding na 5000 milliseconden (5 seconden)
+            }, 4000); // Verwijder de melding na 5000 milliseconden (5 seconden)
 }
             event.preventDefault();
             const selectedThemes = {};
@@ -351,6 +352,7 @@ form.appendChild(fragement);
         var pdfLink = document.createElement('a');
         pdfLink.href = 'spelbord_future_films.pdf';
         pdfLink.download = 'spelbord_future_films.pdf';
+        pdfLink.target = '_blank';
         document.body.appendChild(pdfLink);
         pdfLink.click();
         document.body.removeChild(pdfLink);
