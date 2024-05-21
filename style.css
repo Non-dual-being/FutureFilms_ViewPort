@@ -234,6 +234,11 @@ input[type="checkbox"] {
     border-color: #304878; /* Optioneel: pas de borderkleur aan voor betere zichtbaarheid */
 }
 
+.theme-row .enabled-checkbox:checked:hover {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25); /* Voegt een subtiele schaduw toe voor diepte */
+    background-image: linear-gradient(to top, #ffffff, #f0f0f0); /* Subtiele gradient van wit naar lichtgrijs */
+    border-color: #465267; /* Een iets donkerdere of levendigere tint */
+}
 
 .theme-row .enabled-checkbox:checked::after {
     content: "\1F4A7"; /* Unicode voor blad */
@@ -384,6 +389,9 @@ video {
     left: 50%; /* Start op 50% van de linkerzijde van de container */
     transform: translate(-50%, -50%); /* Centreert de video exact in het midden van de container */
     height: auto; /* Behoudt de aspect ratio van de video */
+    border-radius: 10px;
+    border: 1px solid;
+    border-color: white;
 }
 
 .buttonContainer {
