@@ -98,15 +98,15 @@ h1 {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    top: 5vh; /* Plaats h1 nabij de top van de viewport */
-    font-size: max(35px, 3vw); /* Dynamische tekstgrootte op basis van viewport-breedte */
+    top: 4vh; /* Plaats h1 nabij de top van de viewport */
+    font-size: max(25px, 2.5vw); /* Dynamische tekstgrootte op basis van viewport-breedte */
     color: #152036
 }
 
 
 .center-container {
     position: absolute;
-    top: 50%; /* Centreren ten opzichte van de totale hoogte van de viewport */
+    top: 47%; /* Centreren ten opzichte van de totale hoogte van de viewport */
     left: 50%;
     transform: translate(-50%, -50%); /* Centreren zowel horizontaal als verticaal */
     width: max(400px,33vw); /* Aanpasbare breedte gebaseerd op design voorkeur */
@@ -120,7 +120,7 @@ h1 {
 
 
 h2 {
-    font-size: max(20px, 2vw);
+    font-size: max(15px, 1.5vw);
     color: #152036;
     font-weight: bold;
 }
@@ -134,7 +134,7 @@ h2 .subtitle {
 #themesForm {
     padding: 10px;
     margin-top: 2vh; /* Ruimte tussen h3 en de form */
-    border: 4px solid #152036; /* Stevige, zichtbare grens */
+    border: 6px solid #152036; /* Stevige, zichtbare grens */
     border-radius: 5px;
     width: 90%;
     position: relative;
@@ -153,13 +153,14 @@ h2 .subtitle {
 #themesForm::before {
     left: 0;
     width: 50%;
-    background-color: #15203620; /* Licht doorschijnend donkerblauw */
+    background-color: #3A5078; /* Een solide, donkerblauwe kleur die goed past bij de blauwe balken */
+    
 }
 
 #themesForm::after {
     left: 50%;
     width: 50%;
-    background-color: #15203620; /* Licht doorschijnend donkerblauw */
+    background-color: #F4F4F8; /* Een zachte off-white kleur die goed aansluit bij de witte balken */
 }
 
 
@@ -168,13 +169,76 @@ h2 .subtitle {
     align-items: center;
     width: 100%; /* Zorgt dat de rij de volledige breedte van de form gebruikt */
     justify-content: space-between; /* Centreren over de verticale as */
-    margin-bottom: 10px;
+    margin-bottom: 8px;
+    margin-top: 8px;
     padding-bottom: 10px;
     padding-top:5px;
     padding-left: 4px;
     color:   #2B305F;
     font-size: max(20px, 1.2vw); /* Boven */
-    background: linear-gradient(to right,#465267 50%, rgb(240, 240, 240) 50%);
+    background: linear-gradient(to right, #2B305F 50%,  #e8e8e8 50%);
+    border: white 1px solid;
+}
+
+
+.theme-row:first-of-type {
+    border: 5px solid white; /* Pas de kleur en dikte aan zoals gewenst */
+    background: linear-gradient(to right, #33415C 50%, #f0f0f0 50%); /* Pas de achtergrondkleur aan */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Voeg schaduw toe */
+    margin-top: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.theme-row .themes-label {
+    font-size: max(20px, 1.2vw); /* Boven */
+}
+
+.theme-row .level-toggles {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 7px; /* Pas deze waarde aan om de afstand tussen de level toggles te vergroten */
+}
+
+
+.theme-row input.level-toggle {
+    position: relative; /* Zorg ervoor dat de pseudo-elementen relatief zijn aan de checkbox zelf */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: max(20px, 1.4vw);
+    height: max(20px, 1.4vw);
+    background-color: #304878c7;
+    border: 3px solid white;
+    border-radius: 2px;
+    cursor: pointer;
+    margin: auto;
+}
+
+input.level-toggle:hover {
+    background-color: #465267;
+    border-color: #304878;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input.level-toggle:checked:hover {
+    background-color: white;
+    background-image: linear-gradient(to top, #ffffff, #f0f0f0);
+    border-color: #465267;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+input.level-toggle:checked::after {
+    content: "\1F4A7"; /* Unicode voor druppel */
+    color: #152036;
+    position: absolute;
+    left: 50%;
+    top: 48%;
+    transform: translate(-50%, -50%);
+    font-size: max(10px, 0.9vw);
 }
 
 
